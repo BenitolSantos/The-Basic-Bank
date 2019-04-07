@@ -13,14 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20190407221814) do
 
+  create_table "account_transactions", force: :cascade do |t|
+    t.integer "account_id"
+    t.integer "transaction_id"
+  end
+
   create_table "accounts", force: :cascade do |t|
     t.string  "content"
     t.integer "user_id"
-  end
-
-  create_table "accounttransactions", force: :cascade do |t|
-    t.integer "account_id"
-    t.integer "transaction_id"
   end
 
   create_table "transaction", force: :cascade do |t|
