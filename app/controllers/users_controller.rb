@@ -3,6 +3,11 @@ class UsersController < ApplicationController
   set :views, Proc.new { File.join(root, "../views/") }
 
   get '/signup' do
+    if !logged_in?
+      erb :"users/create_user"
+    else
+      #redirect to ('/accounts')
+    end
   end
 
   post '/signup' do
@@ -19,6 +24,6 @@ class UsersController < ApplicationController
   end
 
   get '/users/:slug'
-  
+
   end
 end
