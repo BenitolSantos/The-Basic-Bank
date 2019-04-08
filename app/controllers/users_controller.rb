@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
+
   end
 
   get '/login' do
@@ -22,13 +23,15 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
+
   end
 
   get '/logout' do
 
+
   end
 
-  get '/users/:slug'
+  get '/users/:slug' do
 
   end
 end
