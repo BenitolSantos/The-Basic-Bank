@@ -14,6 +14,11 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
+    if !logged_in?
+      erb :"users/create_user"
+    else
+      #redirect to ('/accounts')
+    end
   end
 
   post '/login' do
