@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190410022738) do
+ActiveRecord::Schema.define(version: 20190410044808) do
 
-  create_table "accounts", force: :cascade do |t|
+  create_table "profiles", force: :cascade do |t|
     t.string  "content"
     t.integer "balance"
     t.integer "user_id"
   end
 
-  create_table "accounttransactions", force: :cascade do |t|
-    t.integer "account_id"
+  create_table "profiletransactions", force: :cascade do |t|
+    t.integer "profile_id"
     t.integer "transaction_id"
   end
 
