@@ -8,22 +8,5 @@ class AccountsController < ApplicationController
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 end
+#cmd / equals multiline comment
