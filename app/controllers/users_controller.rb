@@ -24,13 +24,14 @@ class UsersController < ApplicationController
 
   get '/login' do
     if !logged_in?
-      erb :"users/create_user"
+      erb :"users/login"
     else
       redirect to ('/profiles')
     end
   end
 
   post '/login' do
+    binding.pry
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
