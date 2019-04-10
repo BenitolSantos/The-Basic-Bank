@@ -1,6 +1,6 @@
-class CreateAccounts < ActiveRecord::Migration
+class CreateProfiles < ActiveRecord::Migration
   def change
-    create_table :accounts do |t|
+    create_table :profiles do |t|
       t.string :content
       t.integer :balance
       t.integer :user_id

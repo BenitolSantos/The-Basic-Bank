@@ -1,5 +1,5 @@
 class Transactions < ActiveRecord::Base
   belongs_to :user
-  has_many :account_transactions
-  has_many :accounts, through: :account_transactions
+  has_many :profile_transactions
+  has_many :profiles, through: :profile_transactions
 end
