@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   set :session_secret, "my_application_secret"
   set :views, Proc.new { File.join(root, "../views/") }
 
+  #sinatra study groups tuesday - friday next week
+  #you can simplify it by removing profiles - amelie
+
   get '/signup' do
     if !logged_in?
       erb :"users/create_user"
