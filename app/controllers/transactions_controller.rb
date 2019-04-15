@@ -20,10 +20,32 @@ class TransactionsController < ApplicationController
   end
 
 
+  get '/transactions/:id' do
+
+  end
 
 
+  post '/transactions' do
+
+  end
 
 
+  get '/transactions/:id/edit' do
+
+  end
+
+  patch '/tweets/:id' do
+
+  end
+
+  delete '/tweets/:id' do
+    if logged_in?
+    else
+      if condition
+      else
+      end
+    end
+  end
 
 
 
