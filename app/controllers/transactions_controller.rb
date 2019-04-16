@@ -3,48 +3,34 @@ class TransactionsController < ApplicationController
   set :views, Proc.new { File.join(root, "../views/") }
 
   get '/transactions' do
-    if logged_in?
-      @tweets = Tweet.all
-      erb : ''
-    else
-      redirect to "/login"
-    end
+    redirect_if_not_logged_in
   end
 
   get '/transactions/new' do
-    if logged_in?
-      erb '/transactions/new'
-    else
-      redirect to "/login"
-    end
+    redirect_if_not_logged_in
   end
 
 
   get '/transactions/:id' do
-    
+    redirect_if_not_logged_in
   end
 
 
   post '/transactions' do
-
+    redirect_if_not_logged_in
   end
 
 
   get '/transactions/:id/edit' do
-
+    redirect_if_not_logged_in
   end
 
   patch '/tweets/:id' do
-
+    redirect_if_not_logged_in
   end
 
   delete '/tweets/:id' do
-    if logged_in?
-    else
-      if condition
-      else
-      end
-    end
+    redirect_if_not_logged_in
   end
 
 
