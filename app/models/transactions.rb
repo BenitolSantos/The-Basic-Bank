@@ -1,4 +1,4 @@
-class Transactions < ActiveRecord::Base
+class Transaction < ActiveRecord::Base
   belongs_to :user
   has_many :profile_transactions
   has_many :profiles, through: :profile_transactions
