@@ -21,6 +21,8 @@ class TransactionsController < ApplicationController
 
   post '/transactions' do
     redirect_if_not_logged_in
+    binding.pry
+    @transaction = Transaction.create(params[:transaction])
   end
 
 
