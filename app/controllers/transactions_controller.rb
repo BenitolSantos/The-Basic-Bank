@@ -21,7 +21,7 @@ class TransactionsController < ApplicationController
 
 
   get '/transactions/:id' do
-
+    
   end
 
 
