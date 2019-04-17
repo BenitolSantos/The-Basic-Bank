@@ -4,7 +4,18 @@ class TransactionsController < ApplicationController
 
   get '/transactions' do
     redirect_if_not_logged_in
-    @transactions = current_user.transaction
+    binding.pry
+    #problem here... current_user.transactions isn't nil or filled
+    # [4] pry(#<TransactionsController>)> current_user.transactions
+    #D, [2019-04-17T18:40:42.848086 #774] DEBUG -- :   Transaction Load (0.1ms)  SELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id
+    #" = ?  [["user_id", 1]]
+    #D, [2019-04-17T18:40:42.848875 #774] DEBUG -- :   Transaction Load (0.1ms)  SELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id
+    #" = ?  [["user_id", 1]]
+    if current_user.transactions != []
+    @transactions = current_user.transactions
+    else
+    @transactions = []
+    end
     erb :'/transactions/index'
   end
 
@@ -21,7 +32,7 @@ class TransactionsController < ApplicationController
 
   post '/transactions' do
     redirect_if_not_logged_in
-    @transaction = Transaction.new(ammount: params["transaction"]["amount"], user_id: current_user.id)
+    @transaction = Transaction.new(amount: params["transaction"]["amount"], user_id: current_user.id)
     #ActiveRecord::SubclassNotFound: Invalid single-table inheritance type: deposit is not a subclass of Transaction
     @transaction.update(type: params["transaction"]["type"])
     @transaction.save
