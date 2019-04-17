@@ -4,7 +4,6 @@ class TransactionsController < ApplicationController
 
   get '/transactions' do
     redirect_if_not_logged_in
-    binding.pryc
     @transactions = current_user.transaction
     erb :'/transactions/index'
   end
@@ -31,9 +30,11 @@ class TransactionsController < ApplicationController
       binding.pry
       current_user.balance += params["transaction"]["amount"].to_i
       current_user.save
+      redirect to "/transactions/index"
     elsif @transaction.type == "withdrawl"
       current_user.balance -= params["transaction"]["amount"].to_i
       current_user.save
+      redirect to "/transactions/index"
     else
       redirect to "/transactions/index"
     end

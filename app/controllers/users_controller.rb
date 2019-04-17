@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       if params[:balance] == ""
         params[:balance] = 0
       end
-      @user = User.create(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance])
+      @user = User.create(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance], content: params[:content])
       @user.save
       session[:user_id] = @user.id
 
