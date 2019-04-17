@@ -1,7 +1,8 @@
 <form class="" action="/transactions/<%@transaction.id%>" method="post">
   <br>
   <h1>Transaction Type? (Deposit or Withdrawl)</h1>
-    <input id="transaction_type" type="text" name="transaction[type]">
+  <input id="transaction_type" type="checkbox" name="transaction[type]["deposit"]">Deposit</input>
+  <input id="transaction_type" type="checkbox" name="transaction[type]["withdrawl"]">Withdrawl</input>
     <br>
   <h1>Ammount</h1>
     <input id="transaction_amount" type="text" name="transaction[amount]">

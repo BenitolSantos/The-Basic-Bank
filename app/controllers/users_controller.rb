@@ -6,18 +6,14 @@ class UsersController < ApplicationController
   #you can simplify it by removing profiles - amelie
 
   get '/signup' do
-    if !logged_in?
-      erb :"users/create_user"
-    else
-      redirect to ('/transactions')
-    end
+     erb :"users/create_user"
   end
 
   post '/signup' do
     if params[:username] == "" || params[:password] == "" || params[:email] == ""
       redirect to ('/signup')
     else
-      @user = User.create(username: params[:username], password: params[:password], email: params[:email])
+      @user = User.create(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance])
       @user.save
       session[:user_id] = @user.id
 

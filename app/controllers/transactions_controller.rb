@@ -28,11 +28,11 @@ class TransactionsController < ApplicationController
     binding.pry
     if @transaction.type.downcase == "deposit"
       binding.pry
-      current_user.update(current_user.ammount + params["transaction"]["amount"])
+      current_user.update(balance: current_user.amount + params["transaction"]["amount"])
     elsif @transaction.type.downcase == "withdrawl"
-      current_user.update(current_user.ammount - params["transaction"]["amount"])
+      current_user.update(balance: current_user.amount - params["transaction"]["amount"])
     else
-      redirect to "/transactions/new"
+      redirect to "/transactions/index"
     end
   end
 
