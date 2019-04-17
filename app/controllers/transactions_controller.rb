@@ -21,7 +21,7 @@ class TransactionsController < ApplicationController
 
   post '/transactions' do
     redirect_if_not_logged_in
-    @transaction = Transaction.new(ammount: params["transaction"]["ammount"], user_id: current_user.id)
+    @transaction = Transaction.new(ammount: params["transaction"]["amount"], user_id: current_user.id)
     #ActiveRecord::SubclassNotFound: Invalid single-table inheritance type: deposit is not a subclass of Transaction
     @transaction.update(type: params["transaction"]["type"])
     @transaction.save
