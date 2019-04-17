@@ -4,7 +4,8 @@ class TransactionsController < ApplicationController
 
   get '/transactions' do
     redirect_if_not_logged_in
-    @transactions = current_user.transactions
+    binding.pryc
+    @transactions = current_user.transaction
     erb :'/transactions/index'
   end
 
