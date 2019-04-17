@@ -1,6 +1,11 @@
 <html>
   <head>
     <title>List of Transactions </title>
+    <% @transactions.each do |transaction| %>
+    <br>
+    <%= transaction.content %>
+    <br>
+    <%end%>
   </head>
   <body>
 

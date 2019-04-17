@@ -48,15 +48,14 @@ class UsersController < ApplicationController
       session.destroy
       redirect to ('/login')
     else
-      redirect to ('/')
+      redirect to ('/login')
     end
   end
 
   get '/users/:slug' do
     if logged_in?
       @user = User.find_by_slug(params[:slug])
-      @accounts = @user.accounts
-      erb :"/users/show"
+      redirect "/transactions"
     else
       redirect to '/signup'
     end
