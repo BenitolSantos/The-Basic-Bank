@@ -13,6 +13,9 @@ class UsersController < ApplicationController
     if params[:username] == "" || params[:password] == "" || params[:email] == ""
       redirect to ('/signup')
     else
+      if params[:balance] == ""
+        params[:balance] = 0
+      end
       @user = User.create(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance])
       @user.save
       session[:user_id] = @user.id

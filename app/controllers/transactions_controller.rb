@@ -26,11 +26,13 @@ class TransactionsController < ApplicationController
     @transaction.update(type: params["transaction"]["type"])
     @transaction.save
     binding.pry
-    if @transaction.type.downcase == "deposit"
+    if @transaction.type == "deposit"
       binding.pry
-      current_user.update(balance: current_user.amount + params["transaction"]["amount"])
-    elsif @transaction.type.downcase == "withdrawl"
-      current_user.update(balance: current_user.amount - params["transaction"]["amount"])
+      current_user.balance += params["transaction"]["amount"].to_i
+      current_user.save
+    elsif @transaction.type == "withdrawl"
+      current_user.balance -= params["transaction"]["amount"].to_i
+      current_user.save
     else
       redirect to "/transactions/index"
     end
