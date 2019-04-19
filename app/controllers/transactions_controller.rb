@@ -4,18 +4,7 @@ class TransactionsController < ApplicationController
 
   get '/transactions' do
     redirect_if_not_logged_in
-    binding.pry
-    #problem here... current_user.transactions isn't nil or filled
-    # [4] pry(#<TransactionsController>)> current_user.transactions
-    #D, [2019-04-17T18:40:42.848086 #774] DEBUG -- :   Transaction Load (0.1ms)  SELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id
-    #" = ?  [["user_id", 1]]
-    #D, [2019-04-17T18:40:42.848875 #774] DEBUG -- :   Transaction Load (0.1ms)  SELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id
-    #" = ?  [["user_id", 1]]
-    if current_user.transactions != []
     @transactions = current_user.transactions
-    else
-    @transactions = []
-    end
     erb :'/transactions/index'
   end
 

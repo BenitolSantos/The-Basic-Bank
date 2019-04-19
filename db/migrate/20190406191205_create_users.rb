@@ -9,3 +9,5 @@ class CreateUsers < ActiveRecord::Migration
     end
   end
 end
+
+#rake db:drop to clear database
