@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20190410022658) do
 
   create_table "transactions", force: :cascade do |t|
     t.integer "amount"
-    t.string  "type"
+    t.string  "version"
     t.integer "user_id"
   end
 
