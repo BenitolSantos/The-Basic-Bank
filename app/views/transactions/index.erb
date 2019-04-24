@@ -1,22 +1,15 @@
-<html>
-  <head>
-    <h1>CURRENT USER</h1>
-    <%= current_user.username %>
-    <h1>CURRENT BALANCE</h1>
-    <%= current_user.balance %>
-    <h1>INFO</h1>
-    <%= current_user.content %>
-    <title>List of Transactions </title>
-    <% @transactions.each do |transaction| %>
-    <br>
-    <%= transaction.version %> of
-    <%= transaction.amount %>
-    <br>
-    <%end%>
-  </head>
-  <body>
-
-  </body>
-  <a href="/transactions/new">New Transaction</a><br>
-  <a href="/logout">logout</a>
-</html>
+<h1>CURRENT USER</h1>
+<%= current_user.username %>
+<h1>CURRENT BALANCE</h1>
+<%= current_user.balance %>
+<h1>INFO</h1>
+<%= current_user.content %>
+<h1>List of Transactions </h1>
+<% @transactions.each do |transaction| %>
+<br>
+<%= transaction.version %> of
+<%= transaction.amount %>
+<%end%>
+<br>
+<a href="/transactions/new">New Transaction</a><br>
+<a href="/logout">logout</a>

@@ -38,7 +38,7 @@ class TransactionsController < ApplicationController
       current_user.save
     else
     end
-      redirect to "/transactions/index"
+      redirect to "/transactions"
   end
 
 
