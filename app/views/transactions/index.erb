@@ -3,11 +3,14 @@
     <h1>CURRENT USER</h1>
     <%= current_user.username %>
     <h1>CURRENT BALANCE</h1>
-    <%= current_user.username %>
+    <%= current_user.balance %>
+    <h1>INFO</h1>
+    <%= current_user.content %>
     <title>List of Transactions </title>
     <% @transactions.each do |transaction| %>
     <br>
-    <%= transaction.content %>
+    <%= transaction.version %> of
+    <%= transaction.amount %>
     <br>
     <%end%>
   </head>
