@@ -1,4 +1,6 @@
+<h1>Edit Transaction</h1>
 <form class="" action="/transactions/<%@transaction.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
   <br>
   <h1>Transaction version? (Deposit or Withdrawl)</h1>
     <input id="transaction_version" type="checkbox" name="deposit">Deposit</input>
@@ -9,4 +11,9 @@
     <br>
     <input id="submit" type="submit" name="Submit" value="submit">
     <br>
+</form>
+
+<form class="" action="index.html" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" name="Delete Transaction" value="delete" id="Delete Transaction">
 </form>

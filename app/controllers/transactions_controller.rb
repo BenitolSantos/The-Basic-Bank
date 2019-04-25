@@ -44,6 +44,7 @@ class TransactionsController < ApplicationController
 
   get '/transactions/:id/edit' do
     redirect_if_not_logged_in
+    
   end
 
   patch '/tweets/:id' do
