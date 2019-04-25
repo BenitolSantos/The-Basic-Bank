@@ -1,12 +1,12 @@
 <h1>CURRENT USER</h1>
 <%= current_user.username %>
 <h1>CURRENT BALANCE</h1>
-<%= current_user.balance %>
+<%= cents_to_dollars(current_user.balance) %>
 <h1>INFO</h1>
 <%= current_user.content %>
 <h1>List of Transactions </h1>
 <% @transactions.each do |transaction| %>
-<a href="/transactions/<%=transaction.id%>"><%= transaction.version %> of <%= transaction.amount %></a>
+<a href="/transactions/<%=transaction.id%>"><%= transaction.version %> of <%= cents_to_dollars(transaction.amount)%></a>
 <%end%>
 <br>
 <br>
