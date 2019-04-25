@@ -6,10 +6,9 @@
 <%= current_user.content %>
 <h1>List of Transactions </h1>
 <% @transactions.each do |transaction| %>
-<br>
-<%= transaction.version %> of
-<%= transaction.amount %>
+<a href="/transactions/<%=transaction.id%>"><%= transaction.version %> of <%= transaction.amount %></a>
 <%end%>
+<br>
 <br>
 <a href="/transactions/new">New Transaction</a><br>
 <a href="/logout">logout</a>
