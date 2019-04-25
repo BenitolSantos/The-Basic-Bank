@@ -44,7 +44,8 @@ class TransactionsController < ApplicationController
 
   get '/transactions/:id/edit' do
     redirect_if_not_logged_in
-    
+    @transaction = Transaction.find_by(id: params[:id])
+    erb :"/transactions/edit"
   end
 
   patch '/tweets/:id' do
