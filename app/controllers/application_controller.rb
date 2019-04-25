@@ -30,6 +30,12 @@ class ApplicationController < Sinatra::Base
       #User.find_by(id: session[:user_id]) if session[:user_id]
     end
 
+    def cents_to_dollars(cents) #helper method due to integers only in sqlite3
+      dollars = cents/100 #dollars
+      cents = cents%100 #cents, the remainder
+      dollars.to_s + "dollars and" + cents.to_s + "cents"
+    end
+
   end
 
 end
