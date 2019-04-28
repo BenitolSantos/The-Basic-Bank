@@ -57,6 +57,7 @@ class TransactionsController < ApplicationController
       current_user.transactions.delete(@transaction)
       current_user.save
     else
+    end
     erb :"/transactions/edit"
   end
 
