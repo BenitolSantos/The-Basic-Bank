@@ -48,8 +48,8 @@ class TransactionsController < ApplicationController
   end
 
   patch '/transactions/:id' do
-    binding.pry
     redirect_if_not_logged_in
+    
   end
 
   delete '/transactions/:id' do
