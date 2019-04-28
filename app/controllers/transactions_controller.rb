@@ -45,6 +45,7 @@ class TransactionsController < ApplicationController
     redirect_if_not_logged_in
     @transaction = Transaction.find_by(id: params[:id])
     #this resets the balance to before the previous edit
+    binding.pry
     if @transaction.version == "deposit"
       @transaction.update(version: "deposit")
       current_user.balance -= @transaction.amount.to_i
