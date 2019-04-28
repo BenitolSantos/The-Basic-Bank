@@ -1,5 +1,5 @@
 <h1>Edit Transaction</h1>
-<form class="" action="/transactions/<%@transaction.id%>" method="post">
+<form class="" action="/transactions/<%= @transaction.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
   <br>
   <h1>Transaction version? (Deposit or Withdrawl)</h1>
@@ -13,7 +13,7 @@
     <br>
 </form>
 
-<form class="" action="index.html" method="post">
+<form class="" action= "/transactions/<%= @transaction.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" name="Delete Transaction" value="delete" id="Delete Transaction">
 </form>
