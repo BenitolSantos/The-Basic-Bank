@@ -1,4 +1,4 @@
 <h2>Transaction ID: <%=@transaction.id%> </h2>
-<h2> <%=@transaction.version%> of <%=@transaction.amount%> </h2>
+<h2> <%=@transaction.version%> of <%= cents_to_dollars(@transaction.amount) %> </h2>
 <br>
 <a href="/transactions/<%=@transaction.id%>/edit">Edit Transaction</a>
