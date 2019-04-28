@@ -3,13 +3,13 @@
   <input id="hidden" type="hidden" name="_method" value="patch">
   <br>
   <h1>Transaction version? (Deposit or Withdrawl)</h1>
-    <input id="transaction_version" type="checkbox" name="deposit">Deposit</input>
-    <input id="transaction_version" type="checkbox" name="withdrawl">Withdrawl</input>
+    <input id="transaction_version" type="checkbox" name="deposit" value=<%=@transaction.version%>>Deposit</input>
+    <input id="transaction_version" type="checkbox" name="withdrawl" value=<%=@transaction.version%>>Withdrawl</input>
     <br>
   <h1>Amount</h1>
-    <input id="transaction_amount" type="text" name="transaction[amount]">
+    <input id="transaction_amount" type="text" name="transaction[amount]" value="<%=@transaction.id%>">
     <br>
-    <input id="submit" type="submit" name="Submit" value="submit">
+    <input type="submit" name="Edit Transaction" value="submit" id="Edit Transaction">
     <br>
 </form>
 

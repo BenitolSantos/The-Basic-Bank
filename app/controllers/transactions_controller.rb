@@ -50,10 +50,6 @@ class TransactionsController < ApplicationController
   patch '/transactions/:id' do
     binding.pry
     redirect_if_not_logged_in
-    if !(params["ammount"].empty?) || !params[]
-    @transaction = Transaction.find_by(id: params[:id])
-    redirect to ("/transactions/#{@transaction.id}/edit")
-    end
   end
 
   delete '/transactions/:id' do
