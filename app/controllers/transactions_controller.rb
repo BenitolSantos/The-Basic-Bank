@@ -49,7 +49,6 @@ class TransactionsController < ApplicationController
 
   patch '/transactions/:id' do
     redirect_if_not_logged_in
-    
   end
 
   delete '/transactions/:id' do
