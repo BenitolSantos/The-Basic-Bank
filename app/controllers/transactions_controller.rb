@@ -47,12 +47,12 @@ class TransactionsController < ApplicationController
     #this resets the balance to before the previous edit
     if @transaction.version == "deposit"
       @transaction.update(version: "deposit")
-      current_user.balance -= params["transaction"]["amount"].to_i
+      current_user.balance -= @transaction.amount.to_i
       current_user.transactions.delete(@transaction)
       current_user.save
     elsif @transaction.version == "withdrawl"
       @transaction.update(version: "withdrawl")
-      current_user.balance += params["transaction"]["amount"].to_i
+      current_user.balance += @transaction.amount.to_i
       current_user.transactions.delete(@transaction)
       current_user.save
     else
