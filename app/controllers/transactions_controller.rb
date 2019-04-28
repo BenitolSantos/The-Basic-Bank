@@ -16,6 +16,8 @@ class TransactionsController < ApplicationController
 
   get '/transactions/:id' do
     redirect_if_not_logged_in
+    @transaction = Transaction.find_by_id(params[:id])
+    erb :'/transactions/show'
   end
 
 
@@ -45,16 +47,18 @@ class TransactionsController < ApplicationController
     erb :"/transactions/edit"
   end
 
-  patch '/tweets/:id' do
+  patch '/transactions/:id' do
+    binding.pry
     redirect_if_not_logged_in
+    if !(params["ammount"].empty?) || !params[]
+    @transaction = Transaction.find_by(id: params[:id])
+    redirect to ("/transactions/#{@transaction.id}/edit")
+    end
   end
 
-  delete '/tweets/:id' do
+  delete '/transactions/:id' do
     redirect_if_not_logged_in
   end
-
-
-
 
 
 
