@@ -44,20 +44,20 @@ class TransactionsController < ApplicationController
   get '/transactions/:id/edit' do
     redirect_if_not_logged_in
     @transaction = Transaction.find_by(id: params[:id])
-    binding.pry
     #this resets the balance to before the previous edit
-    if @transaction.type == "deposit"
+    if @transaction.version == "deposit"
       @transaction.update(version: "deposit")
       current_user.balance -= params["transaction"]["amount"].to_i
       current_user.transactions.delete(@transaction)
       current_user.save
-    elsif @transaction.type == "withdrawl"
+    elsif @transaction.version == "withdrawl"
       @transaction.update(version: "withdrawl")
       current_user.balance += params["transaction"]["amount"].to_i
       current_user.transactions.delete(@transaction)
       current_user.save
     else
     end
+    binding.pry
     erb :"/transactions/edit"
   end
 
