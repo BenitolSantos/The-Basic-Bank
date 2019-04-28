@@ -52,8 +52,6 @@ class TransactionsController < ApplicationController
       current_user.transactions.delete(@transaction)
       current_user.save
     elsif @transaction.version == "withdrawl"
-      @transaction.update(version: "withdrawl")
-      current_user.balance += @transaction.amount.to_i
       current_user.transactions.delete(@transaction)
       current_user.save
     else
@@ -65,6 +63,19 @@ class TransactionsController < ApplicationController
   patch '/transactions/:id' do
     binding.pry
     redirect_if_not_logged_in
+    if !(params["ammount"].empty?)
+      if params["deposit"] == "on"
+        @transaction.update(version: "deposit")
+        current_user.balance += @transaction.amount.to_i
+      elsif params["withdrawl"] == "on"
+        @transaction.update(version: "withdrawl")
+        current_user.balance -= @transaction.amount.to_i
+      else
+      end
+      redirect to ("/transactions/#{@transaction.id}")
+    else
+      redirect to ("/transactions/#{@transaction.id}/edit")
+    end
   end
 
   delete '/transactions/:id' do
