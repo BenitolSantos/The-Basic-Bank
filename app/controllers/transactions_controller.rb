@@ -49,10 +49,9 @@ class TransactionsController < ApplicationController
     if @transaction.version == "deposit"
       @transaction.update(version: "deposit")
       current_user.balance -= @transaction.amount.to_i
-      current_user.transactions.delete(@transaction)
       current_user.save
     elsif @transaction.version == "withdrawl"
-      current_user.transactions.delete(@transaction)
+      current_user.balance += @transaction.amount.to_i
       current_user.save
     else
     end
@@ -80,6 +79,12 @@ class TransactionsController < ApplicationController
 
   delete '/transactions/:id' do
     redirect_if_not_logged_in
+    @transaction - Transaction.find_by(id: params[:id])
+    @user = User.find_by(id: @transaction.user_id)
+    if current_user == @user
+      @user.transactions.delete(@transaction)
+      Transaction.all.delete(@transaction)
+    end
   end
 
 
