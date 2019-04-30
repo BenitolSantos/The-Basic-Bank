@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :transactions
   has_secure_password
   validates_presence_of :username,:email, :password_digest
+  #should be lowercase
 
   def slug
     self.username.downcase.split('').join('-')
