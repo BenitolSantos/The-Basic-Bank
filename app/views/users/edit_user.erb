@@ -1,4 +1,5 @@
 <form class="" action="/transactions" method="POST">
+<input id="hidden" type="hidden" name="_method" value="patch">
   <label>Email</label>
   <br>
   <input type="text" name="email">
@@ -20,4 +21,9 @@
   <input type="text" name="content">
   <br>
   <input type="submit" value="Signup" id="submit">
+</form>
+
+<form class="" action="/transactions" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" name="Delete Transaction" value="delete" id="Delete Transaction">
 </form>
