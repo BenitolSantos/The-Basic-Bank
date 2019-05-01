@@ -61,4 +61,31 @@ class UsersController < ApplicationController
       redirect to '/signup'
     end
   end
+
+  get '/users/:slug/edit' do
+    if logged_in?
+      @user = User.find_by_slug(params[:slug])
+      erb :"/users/edit_user"
+    else
+      redirect to '/signup'
+    end
+  end
+
+  patch '/users/:slug' do
+    if logged_in?
+      @user = User.find_by_slug(params[:slug])
+      erb :"/users/edit_user"
+    else
+      redirect to '/signup'
+    end
+  end
+
+  delete '/users/:slug' do
+    if logged_in?
+      @users = User.all
+      @users.delete(current_user)
+    else
+      redirect to '/signup'
+    end
+  end
 end
