@@ -78,12 +78,27 @@ class UsersController < ApplicationController
     else
       redirect to '/signup'
     end
+
+    if params[:username] == "" || params[:password] == "" || params[:email] == ""
+      redirect to ('/signup')
+    else
+      if params[:balance] == ""
+        params[:balance] = 0
+      end
+      @user = User.create(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance], content: params[:content])
+      @user.save
+      session[:user_id] = @user.id
+
+      redirect to ("/transactions")
+    end
   end
 
   delete '/users/:slug' do
     if logged_in?
+      session.destroy
       @users = User.all
       @users.delete(current_user)
+      redirect to '/signup'
     else
       redirect to '/signup'
     end
