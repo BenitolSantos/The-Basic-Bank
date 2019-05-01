@@ -45,7 +45,6 @@ class TransactionsController < ApplicationController
     redirect_if_not_logged_in
     @transaction = Transaction.find_by(id: params[:id])
     #this resets the balance to before the previous edit
-    binding.pry
     if @transaction.version == "deposit"
       @transaction.update(version: "deposit")
       current_user.balance -= @transaction.amount.to_i
@@ -55,12 +54,10 @@ class TransactionsController < ApplicationController
       current_user.save
     else
     end
-    binding.pry
     erb :"/transactions/edit"
   end
 
   patch '/transactions/:id' do
-    binding.pry
     redirect_if_not_logged_in
     if !(params["ammount"].empty?)
       if params["deposit"] == "on"
@@ -78,8 +75,15 @@ class TransactionsController < ApplicationController
   end
 
   delete '/transactions/:id' do
+=begin
+error when running after deleting
+ Rack::Lint::LintError at /transactions/2
+Status must be >=100 seen as integer
+Ruby	/usr/local/rvm/gems/ruby-2.6.1/gems/rack-2.0.7/lib/rack/lint.rb: in assert, line 20
+Web	DELETE 142.93.113.210/transactions/2
+=end
     redirect_if_not_logged_in
-    @transaction - Transaction.find_by(id: params[:id])
+    @transaction = Transaction.find_by(id: params[:id])
     @user = User.find_by(id: @transaction.user_id)
     if current_user == @user
       @user.transactions.delete(@transaction)
