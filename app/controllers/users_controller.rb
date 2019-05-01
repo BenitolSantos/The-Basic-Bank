@@ -74,22 +74,20 @@ class UsersController < ApplicationController
   patch '/users/:slug' do
     if logged_in?
       @user = User.find_by_slug(params[:slug])
-      erb :"/users/edit_user"
+      if params[:username] == "" || params[:password] == "" || params[:email] == ""
+        redirect to ('/signup')
+      else
+        if params[:balance] == ""
+          params[:balance] = 0
+        end
+        @user = User.create(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance], content: params[:content])
+        @user.save
+        session[:user_id] = @user.id
+
+        redirect to ("/transactions")
+      end
     else
       redirect to '/signup'
-    end
-
-    if params[:username] == "" || params[:password] == "" || params[:email] == ""
-      redirect to ('/signup')
-    else
-      if params[:balance] == ""
-        params[:balance] = 0
-      end
-      @user = User.create(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance], content: params[:content])
-      @user.save
-      session[:user_id] = @user.id
-
-      redirect to ("/transactions")
     end
   end
 
