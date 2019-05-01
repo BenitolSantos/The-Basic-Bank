@@ -1,4 +1,12 @@
-body { background-color: #ffd700 ;
+body {
+  background-color: #ffd700 ;
   text-align: center;
+}
 
+h1 {
+  color: green ;
+}
+
+h2 {
+  color: green ;
 }
