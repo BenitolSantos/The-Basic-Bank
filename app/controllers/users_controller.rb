@@ -39,6 +39,7 @@ class UsersController < ApplicationController
 
       redirect "/transactions"
     else
+      flash[:message] = "You don't have an account, you need to sign up."
       redirect to '/signup'
     end
   end
@@ -53,51 +54,39 @@ class UsersController < ApplicationController
   end
 
   get '/users/:slug' do
-    if logged_in?
-      @user = User.find_by_slug(params[:slug])
-      redirect "/transactions"
-    else
-      redirect to '/signup'
-    end
+    redirect_if_not_logged_in
+    @user = User.find_by_slug(params[:slug])
+    redirect "/transactions"
   end
 
   get '/users/:slug/edit' do
-    if logged_in?
-      @user = User.find_by_slug(params[:slug])
-      erb :"/users/edit_user"
-    else
-      redirect to '/signup'
-    end
+    redirect_if_not_logged_in
+    @user = User.find_by_slug(params[:slug])
+    erb :"/users/edit_user"
   end
 
   patch '/users/:slug' do
-    if logged_in?
-      @user = User.find_by_slug(params[:slug])
-      if params[:username] == "" || params[:password] == "" || params[:email] == ""
-        redirect to ('/signup')
-      else
-        if params[:balance] == ""
-          params[:balance] = 0
-        end
-        @user = User.create(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance], content: params[:content])
-        @user.save
-        session[:user_id] = @user.id
-
-        redirect to ("/transactions")
-      end
+    redirect_if_not_logged_in
+    @user = User.find_by_slug(params[:slug])
+    if params[:username] == "" || params[:password] == "" || params[:email] == ""
+      redirect to ('/signup')
     else
-      redirect to '/signup'
+      if params[:balance] == ""
+        params[:balance] = 0
+      end
+      @user = User.create(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance], content: params[:content])
+      @user.save
+      session[:user_id] = @user.id
+
+      redirect to ("/transactions")
     end
   end
 
   delete '/users/:slug' do
-    if logged_in?
+      redirect_if_not_logged_in
       session.destroy
       @users = User.all
       @users.delete(current_user)
       redirect to '/signup'
-    else
-      redirect to '/signup'
-    end
   end
 end
