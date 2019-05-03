@@ -59,7 +59,7 @@ class TransactionsController < ApplicationController
 
   patch '/transactions/:id' do
     redirect_if_not_logged_in
-    if !(params["ammount"].empty?)
+    if !(params["amount"].empty?)
       if params["deposit"] == "on"
         @transaction.update(version: "deposit")
         current_user.balance += @transaction.amount.to_i
