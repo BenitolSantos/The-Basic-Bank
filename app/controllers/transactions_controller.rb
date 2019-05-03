@@ -59,22 +59,21 @@ class TransactionsController < ApplicationController
 
   patch '/transactions/:id' do
     redirect_if_not_logged_in
-    binding.pry
     @transaction = Transaction.find_by(id: params[:id])
     if !(params["transaction"]["amount"].empty?)
-      if params["deposit"] == "on"
-        binding.pry
+      if params["deposit"] == "deposit"
         @transaction.update(version: "deposit", amount: params["transaction"]["amount"])
         current_user.balance += @transaction.amount.to_i
         @transaction.save
         current_user.save
-      elsif params["withdrawl"] == "on"
+      elsif params["withdrawl"] == "withdrawl"
         @transaction.update(version: "deposit", amount: params["transaction"]["amount"])
         current_user.balance -= @transaction.amount.to_i
         @transaction.save
         current_user.save
       else
       end
+      binding.pry
       redirect to ("/transactions/#{@transaction.id}")
     else
       redirect to ("/transactions/#{@transaction.id}/edit")
