@@ -58,8 +58,8 @@ class TransactionsController < ApplicationController
   end
 
   patch '/transactions/:id' do
-    binding.pry
     redirect_if_not_logged_in
+    @transaction = Transaction.find_by(id: params[:id])
     if !(params["transaction"]["amount"].empty?)
       if params["deposit"] == "on"
         @transaction.update(version: "deposit")
