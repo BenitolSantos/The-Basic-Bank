@@ -63,13 +63,16 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find_by(id: params[:id])
     if !(params["transaction"]["amount"].empty?)
       if params["deposit"] == "on"
-        @transaction.update(version: "deposit")
-        @transaction.amount = params["transaction"]["amount"]
+        binding.pry
+        @transaction.update(version: "deposit", amount: params["transaction"]["amount"])
         current_user.balance += @transaction.amount.to_i
+        @transaction.save
+        current_user.save
       elsif params["withdrawl"] == "on"
-        @transaction.update(version: "withdrawl")
-        @transaction.amount = params["transaction"]["amount"]
+        @transaction.update(version: "deposit", amount: params["transaction"]["amount"])
         current_user.balance -= @transaction.amount.to_i
+        @transaction.save
+        current_user.save
       else
       end
       redirect to ("/transactions/#{@transaction.id}")
