@@ -63,6 +63,9 @@ class UsersController < ApplicationController
   get '/users/:slug/edit' do
     redirect_if_not_logged_in
     @user = User.find_by_slug(params[:slug])
+    if current_user != @user
+      redirect to ("/transactions")
+    end
     erb :"/users/edit_user"
   end
 
