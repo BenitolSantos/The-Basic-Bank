@@ -9,7 +9,7 @@
     <input id="transaction_version" type="checkbox" name="withdrawl" value=<%= @transaction.version %> <%= 'checked' if @transaction.version == "withdrawl" %>>Withdrawl</input>
     <br>
   <h1>Amount (converts every 100 cents to dollars)</h1>
-    <input id="transaction_amount" type="text" name="transaction[amount]" value="<%=@transaction.id%>">
+    <input id="transaction_amount" type="text" name="transaction[amount]" value="<%=@transaction.amount%>">
     <br>
     <input type="submit" name="Edit Transaction" value="submit" id="Edit Transaction">
     <br>

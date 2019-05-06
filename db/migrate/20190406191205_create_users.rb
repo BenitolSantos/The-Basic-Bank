@@ -5,7 +5,8 @@ class CreateUsers < ActiveRecord::Migration[4.2]
       t.string :email
       t.string :content
       t.integer :balance
-      t.string :password_digest #
+      t.string :password_digest #bcrypt is working with activerecord and salting and encrypt password
+      #.authenticate takes encrypts the params to compare
     end
   end
 end

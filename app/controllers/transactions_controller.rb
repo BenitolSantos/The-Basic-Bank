@@ -43,8 +43,18 @@ class TransactionsController < ApplicationController
 
   get '/transactions/:id/edit' do
     redirect_if_not_logged_in
-    @transaction = Transaction.find_by(id: params[:id])
+    @transaction = current_user.transactions.find_by(id: params[:id])
+    if @transaction == nil
+      redirect to("/transactions")
+    end
     #this resets the balance to before the previous edit
+    #move line 46 to 56 to patch and delete just incase they hit the edit page twice
+    erb :"/transactions/edit"
+  end
+
+  patch '/transactions/:id' do
+    redirect_if_not_logged_in
+    @transaction = current_user.transactions.find_by(id: params[:id])
     if @transaction.version == "deposit"
       @transaction.update(version: "deposit")
       current_user.balance -= @transaction.amount.to_i
@@ -54,12 +64,7 @@ class TransactionsController < ApplicationController
       current_user.save
     else
     end
-    erb :"/transactions/edit"
-  end
 
-  patch '/transactions/:id' do
-    redirect_if_not_logged_in
-    @transaction = Transaction.find_by(id: params[:id])
     if !(params["transaction"]["amount"].empty?)
       if params["deposit"] == "deposit"
         @transaction.update(version: "deposit", amount: params["transaction"]["amount"])
@@ -73,7 +78,6 @@ class TransactionsController < ApplicationController
         current_user.save
       else
       end
-      binding.pry
       redirect to ("/transactions/#{@transaction.id}")
     else
       redirect to ("/transactions/#{@transaction.id}/edit")
@@ -82,8 +86,18 @@ class TransactionsController < ApplicationController
 
   delete '/transactions/:id' do
     redirect_if_not_logged_in
-    @transaction = Transaction.find_by(id: params[:id])
-    @user = User.find_by(id: @transaction.user_id)
+    @transaction = current_user.transactions.find_by(id: params[:id])
+    @user = @transaction.user
+    if @transaction.version == "deposit"
+      @transaction.update(version: "deposit")
+      current_user.balance -= @transaction.amount.to_i
+      current_user.save
+    elsif @transaction.version == "withdrawl"
+      current_user.balance += @transaction.amount.to_i
+      current_user.save
+    else
+    end
+    #applies the ActiveRecord relationship
     if current_user == @user
       @user.transactions.delete(@transaction)
       Transaction.all.delete(@transaction)

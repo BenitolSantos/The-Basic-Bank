@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
+    #add if else to handle people with the same user name or email
     if params[:username] == "" || params[:password] == "" || params[:email] == ""
       redirect to ('/signup')
     else
@@ -34,7 +35,7 @@ class UsersController < ApplicationController
 
   post '/login' do
     @user = User.find_by(:username => params[:username])
-    if @user && @user.authenticate(params[:password])
+    if @user && @user.authenticate(params[:password]) #keeps it secret via an activerecord method
       session[:user_id] = @user.id
 
       redirect "/transactions"
@@ -74,7 +75,7 @@ class UsersController < ApplicationController
       if params[:balance] == ""
         params[:balance] = 0
       end
-      @user = User.create(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance], content: params[:content])
+      @user = User.update(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance], content: params[:content])
       @user.save
       session[:user_id] = @user.id
 
