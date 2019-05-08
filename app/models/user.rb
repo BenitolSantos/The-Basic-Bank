@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   #model file should be lowercase
 
   def slug
-    self.username.downcase.split('').join('-')
+    self.username.downcase
   end
 
   def self.find_by_slug(slug)
