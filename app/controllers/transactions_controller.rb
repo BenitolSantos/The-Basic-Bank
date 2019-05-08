@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
   set :session_secret, "my_application_secret"
   set :views, Proc.new { File.join(root, "../views/") }
-
+  register Sinatra::Flash
   get '/transactions' do
     redirect_if_not_logged_in
     @transactions = current_user.transactions
@@ -45,6 +45,7 @@ class TransactionsController < ApplicationController
     redirect_if_not_logged_in
     @transaction = current_user.transactions.find_by(id: params[:id])
     if @transaction == nil
+      flash[:message] = "Thats not your transaction."
       redirect to("/transactions")
     end
     #this resets the balance to before the previous edit

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   set :session_secret, "my_application_secret"
   set :views, Proc.new { File.join(root, "../views/") }
-
+  register Sinatra::Flash
   #sinatra study groups tuesday - friday next week
   #you can simplify it by removing profiles - amelie
 
@@ -17,11 +17,16 @@ class UsersController < ApplicationController
       if params[:balance] == ""
         params[:balance] = 0
       end
-      @user = User.create(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance], content: params[:content])
-      @user.save
-      session[:user_id] = @user.id
 
-      redirect to ("/transactions")
+      if !(User.find_by(username: params[:username]))
+        @user = User.create(username: params[:username], password: params[:password], email: params[:email], balance: params[:balance], content: params[:content])
+        @user.save
+        session[:user_id] = @user.id
+        redirect to ("/transactions")
+      else
+        flash[:message] = "Account taken, pick a different username."
+        redirect to '/signup'
+      end
     end
   end
 
@@ -64,6 +69,7 @@ class UsersController < ApplicationController
     redirect_if_not_logged_in
     @user = User.find_by_slug(params[:slug])
     if current_user != @user
+      flash[:message] = "Thats not your account."
       redirect to ("/transactions")
     end
     erb :"/users/edit_user"

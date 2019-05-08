@@ -1,3 +1,6 @@
+<h1> <% if flash[:message] %>
+  <%= flash[:message] %>
+<% end %> </h1>
 <h1>CURRENT USER</h1>
 <h2><%= current_user.username %></h2>
 <h1>CURRENT BALANCE</h1>
