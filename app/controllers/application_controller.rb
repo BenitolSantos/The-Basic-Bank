@@ -15,6 +15,15 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
+    def redirect_if_not_your_transaction
+      @transaction = current_user.transactions.find_by(id: params[:id])
+      #transaction flash message for people trying to access other transactions
+      if @transaction == nil
+        flash[:message] = "Thats not your transaction."
+        redirect to("/transactions")
+      end
+    end
+
     def redirect_if_not_logged_in
       if !logged_in?
         flash[:message] = "You need to login."
